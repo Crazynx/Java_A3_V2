@@ -6,6 +6,9 @@ import javafx.util.Duration;
 
 import java.util.*;
 
+/* Class for managing the card pane, this class initializes the pane, variables needed in checkForMatch when
+* a object is created from this class. It also has methods which are used when resetting the game */
+
 public class CardManager {
 
     private GridPane cardPane;
@@ -13,14 +16,14 @@ public class CardManager {
     private List<Card> matchedCards;
     private StatManager statManager;
     private Card previousCard;
-    private boolean isCheckingFormatch;
+    private boolean isCheckingForMatch;
 
     public CardManager(StatManager statManager) {
         this.statManager = statManager;
         cardPane = new GridPane();
         cardList = new ArrayList<>();
         matchedCards = new ArrayList<>();
-        isCheckingFormatch = false;
+        isCheckingForMatch = false;
         initCardList();
         shuffleCards();
         setCardsToPane();
@@ -31,17 +34,12 @@ public class CardManager {
     }
 
     public void clearMatchedCards() {
-        System.out.println(matchedCards.toString());
         matchedCards.clear();
-        System.out.println(matchedCards.toString());
     }
 
     public void  resetCards() {
         for (Card card : cardList) {
-            System.out.println(card);
             card.setTurnable();
-            System.out.println("--------------------------------");
-            System.out.println(card);
         }
     }
 
@@ -66,39 +64,39 @@ public class CardManager {
     }
 
     private void checkForMatch(Card card) {
-        if (isCheckingFormatch == false) {
+        if (isCheckingForMatch == false) {
             card.turnCard();
             if (previousCard != null && previousCard != card) {
                 if (!matchedCards.contains(card) && !matchedCards.contains(previousCard)) {
-                    isCheckingFormatch = true;
-                    if (card.getValue() == previousCard.getValue()) {
+                    isCheckingForMatch = true;
+                    if (card.getValue() == previousCard.getValue()) { // match
                         if (card != previousCard) {
                             card.setUnturnable();
                             previousCard.setUnturnable();
-
                             statManager.incrementScore();
+                            statManager.checkForWin();
                             matchedCards.add(card);
                             matchedCards.add(previousCard);
                             previousCard = null;
-                            isCheckingFormatch = false;
+                            isCheckingForMatch = false;
                         }
-                    } else {
+                    } else { // no match
                         PauseTransition delay = new PauseTransition(Duration.millis(700));
                         delay.setOnFinished(event -> {
                             card.turnCard();
                             previousCard.turnCard();
                             previousCard = null;
-                            isCheckingFormatch = false;
-
+                            isCheckingForMatch = false;
                         });
                         delay.play();
                     }
                 }
-            } else {
+            } else if (!matchedCards.contains(card)) {
+                if (!card.isTurned()) {
+                    card.turnCard();
+                }
                 previousCard = card;
             }
-        } else {
-            System.out.println(isCheckingFormatch);
         }
     }
 

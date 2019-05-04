@@ -1,9 +1,11 @@
 package sample;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+
+/* Class for managing the stat pane. Contains methods for incrementing and resetting the score. The other methods
+* are used for initializing the object.*/
 
 public class StatManager {
 
@@ -19,7 +21,6 @@ public class StatManager {
         statPane.setAlignment(Pos.CENTER);
         initScoreLabel();
         initResetButton();
-
     }
 
     private void initScoreLabel() {
@@ -48,6 +49,21 @@ public class StatManager {
     public void incrementScore() {
         score++;
         scoreLabel.setText("Score: " + score);
+    }
+
+    public void checkForWin() {
+        if (score == 8) { // max score is achieved
+            ButtonType playAgain = new ButtonType("Play again", ButtonBar.ButtonData.OK_DONE);
+            ButtonType exitGame = new ButtonType("Exit game", ButtonBar.ButtonData.CANCEL_CLOSE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "You won!\nPlay again or exit game?", playAgain, exitGame);
+            alert.showAndWait();
+
+            if (alert.getResult() == playAgain) {
+                game.restart();
+            } else {
+                System.exit(0);
+            }
+        }
     }
 
     public VBox getStatPane() {

@@ -14,6 +14,9 @@ public class Game {
     private GridPane cardPane;
     private VBox statPane;
 
+    /* Class that's responsible for creating the memory game. It's initializing other objects used for the game and
+    * sets the needed objects to the mainPane. */
+
     public Game() {
 
         statManager = new StatManager(this);

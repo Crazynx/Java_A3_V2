@@ -1,10 +1,7 @@
 package sample;
 
-import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
-import javafx.animation.Timeline;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.util.*;
@@ -16,12 +13,14 @@ public class CardManager {
     private List<Card> matchedCards;
     private StatManager statManager;
     private Card previousCard;
+    private boolean isCheckingFormatch;
 
     public CardManager(StatManager statManager) {
         this.statManager = statManager;
         cardPane = new GridPane();
         cardList = new ArrayList<>();
         matchedCards = new ArrayList<>();
+        isCheckingFormatch = false;
         initCardList();
         shuffleCards();
         setCardsToPane();
@@ -67,36 +66,39 @@ public class CardManager {
     }
 
     private void checkForMatch(Card card) {
-        card.turnCard();
-        if (previousCard != null) {
-            if (!matchedCards.contains(card) && !matchedCards.contains(previousCard)) {
-                if (card.getValue() == previousCard.getValue()) {
-                    if (card != previousCard) {
-                        card.setUnturnable();
-                        previousCard.setUnturnable();
+        if (isCheckingFormatch == false) {
+            card.turnCard();
+            if (previousCard != null && previousCard != card) {
+                if (!matchedCards.contains(card) && !matchedCards.contains(previousCard)) {
+                    isCheckingFormatch = true;
+                    if (card.getValue() == previousCard.getValue()) {
+                        if (card != previousCard) {
+                            card.setUnturnable();
+                            previousCard.setUnturnable();
 
-                        statManager.incrementScore();
-                        matchedCards.add(card);
-                        matchedCards.add(previousCard);
-                        System.out.println(card);
-                        System.out.println(previousCard);
-                        previousCard = null;
+                            statManager.incrementScore();
+                            matchedCards.add(card);
+                            matchedCards.add(previousCard);
+                            previousCard = null;
+                            isCheckingFormatch = false;
+                        }
+                    } else {
+                        PauseTransition delay = new PauseTransition(Duration.millis(700));
+                        delay.setOnFinished(event -> {
+                            card.turnCard();
+                            previousCard.turnCard();
+                            previousCard = null;
+                            isCheckingFormatch = false;
+
+                        });
+                        delay.play();
                     }
-                } else {
-                    System.out.println("No match");
-                    System.out.println("Prev. card: " + previousCard.getValue());
-                    System.out.println(card.getValue());
-                    PauseTransition delay = new PauseTransition(Duration.seconds(1));
-                    delay.setOnFinished( event -> {
-                        card.turnCard();
-                        previousCard.turnCard();
-                        previousCard = null;
-                    });
-                    delay.play();
                 }
+            } else {
+                previousCard = card;
             }
         } else {
-            previousCard = card;
+            System.out.println(isCheckingFormatch);
         }
     }
 

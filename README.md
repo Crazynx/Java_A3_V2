@@ -18,6 +18,10 @@ I created the following classes:
 
 - Card: Class that extends the JavaFX button. Basically a JavaFX button with the option to assign a value to it. Also has methods like turnCard (used to turn the card), setUnturnable (used after the card is matched with another card).
 
+Everytime you click a card, it checks for a match between the current card and the previous card. 
+- If there's a match the cards will be set unturnable, so that if you click on a matched card it doesn't turn. 
+- If there's no match the cards will be turned after 1 second.
+
 # Changelog
 - Easier to read
 - Used more OOP

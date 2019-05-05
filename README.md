@@ -1,6 +1,6 @@
+![Comparison in meme format](https://soccershortsblog.files.wordpress.com/2019/01/new-and-improved.jpg?w=640)
 # Java_A3_V2
 Newer and better version of the original JavA3 project. It's more object-oriented and easier to read. I have made version 2 because I was bored and wasn't happy with my experience with OOP.
-![Comparison in meme format](https://i.imgur.com/dfQy39e.jpg)
 
 # Original
 The assignment is about making a 4x4 card game with OOP. The rules are simple:

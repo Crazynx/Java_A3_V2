@@ -4,8 +4,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
-/* Class for managing the stat pane. Contains methods for incrementing and resetting the score. The other methods
-* are used for initializing the object.*/
+/**
+* Class for managing the stat pane. Contains methods for incrementing and resetting the score. The other methods
+* are used for initializing the object.
+*/
 
 public class StatManager {
 

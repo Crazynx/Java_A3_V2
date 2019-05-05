@@ -4,8 +4,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-/* Class that inherits the JavaFX button but has some homemade methods such as setValue which are useful for comparing
-* two cards. It also has methods which "turn" the card, but in reality it just sets the opposite ImageView to the card.*/
+/**
+* Class that inherits the JavaFX button but has some homemade methods such as setValue which are useful for comparing
+* two cards. It also has methods which "turn" the card, but in reality it just sets the opposite ImageView to the card.
+*/
 
 
 public class Card extends Button {

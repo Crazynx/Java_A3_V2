@@ -3,11 +3,12 @@ package sample;
 import javafx.animation.PauseTransition;
 import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
-
 import java.util.*;
 
-/* Class for managing the card pane, this class initializes the pane, variables needed in checkForMatch when
-* a object is created from this class. It also has methods which are used when resetting the game */
+/**
+* Class for managing the card pane, this class initializes the pane, variables needed in checkForMatch when
+* a object is created from this class. It also has methods which are used when resetting the game
+*/
 
 public class CardManager {
 

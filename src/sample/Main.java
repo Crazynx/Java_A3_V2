@@ -12,7 +12,7 @@ public class Main extends Application {
         primaryStage.setHeight(460);
         primaryStage.setWidth(430);
         primaryStage.setResizable(false);
-        primaryStage.setTitle("Java A3 V2 - Chad Version, Mady by Crazynx");
+        primaryStage.setTitle("Java A3 V2");
         primaryStage.show();
     }
 

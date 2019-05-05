@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -12,6 +13,7 @@ public class Main extends Application {
         primaryStage.setHeight(460);
         primaryStage.setWidth(430);
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image(String.valueOf(getClass().getResource("resources/icons/memory.png"))));
         primaryStage.setTitle("Java A3 V2");
         primaryStage.show();
     }

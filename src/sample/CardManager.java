@@ -65,6 +65,10 @@ public class CardManager {
 
     private void checkForMatch(Card card) {
         if (isCheckingForMatch == false) {
+            System.out.println(cardList.toString());
+            if (!matchedCards.isEmpty()) {
+                System.out.println(matchedCards.get(0));
+            }
             card.turnCard();
             if (previousCard != null && previousCard != card) {
                 if (!matchedCards.contains(card) && !matchedCards.contains(previousCard)) {
@@ -74,11 +78,11 @@ public class CardManager {
                             card.setUnturnable();
                             previousCard.setUnturnable();
                             statManager.incrementScore();
-                            statManager.checkForWin();
                             matchedCards.add(card);
                             matchedCards.add(previousCard);
                             previousCard = null;
                             isCheckingForMatch = false;
+                            statManager.checkForWin();
                         }
                     } else { // no match
                         PauseTransition delay = new PauseTransition(Duration.millis(700));

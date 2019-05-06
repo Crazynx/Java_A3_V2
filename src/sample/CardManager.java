@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
 * Class for managing the card pane, this class initializes the pane, variables needed in checkForMatch when
-* a object is created from this class. It also has methods which are used when resetting the game
+* a object is created from this class. It also has methods which are used when resetting the game 
 */
 
 public class CardManager {

@@ -11,16 +11,19 @@ import javafx.scene.layout.VBox;
 
 public class StatManager {
 
-    private Game game;
+    private sample.Game game;
     private VBox statPane;
     private Label scoreLabel;
+    private Label triesLabel;
     private int score;
+    private int tries;
     private Button resetButton;
 
     public StatManager(Game game) {
         this.game = game;
         statPane = new VBox();
         statPane.setAlignment(Pos.CENTER);
+        initTriesLabel();
         initScoreLabel();
         initResetButton();
     }
@@ -32,12 +35,17 @@ public class StatManager {
         statPane.getChildren().add(scoreLabel);
     }
 
+    private void initTriesLabel() {
+        triesLabel = new Label();
+        tries = 0;
+        triesLabel.setText("Tries: " + tries);
+        statPane.getChildren().add(triesLabel);
+    }
+
     private void initResetButton() {
         resetButton = new Button();
         resetButton.setText("Retry");
-        resetButton.setOnAction(event -> {
-            game.restart();
-        });
+        resetButton.setOnAction(event -> game.restart());
         resetButton.setPrefHeight(200);
         resetButton.setPrefWidth(50);
         statPane.getChildren().add(resetButton);
@@ -48,9 +56,19 @@ public class StatManager {
         scoreLabel.setText("Score: " + score);
     }
 
+    public void resetTries() {
+        tries = 0;
+        scoreLabel.setText("Tries: " + tries);
+    }
+
     public void incrementScore() {
         score++;
         scoreLabel.setText("Score: " + score);
+    }
+
+    public void incrementTries() {
+        tries++;
+        triesLabel.setText("Tries: " + tries);
     }
 
     public void checkForWin() {

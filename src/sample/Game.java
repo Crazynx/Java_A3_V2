@@ -45,6 +45,7 @@ public class Game {
         cardManager.removeCardsFromPane();
         cardManager.setCardsToPane();
         statManager.resetScore();
+        statManager.resetTries();
     }
 
 

@@ -49,8 +49,8 @@ public class CardManager {
     }
 
     public void removeCardsFromPane() {
-        for (int x = 0; x < cardList.size(); x++) {
-            cardPane.getChildren().remove(cardList.get(x));
+        for (Card card : cardList) {
+            cardPane.getChildren().remove(card);
         }
     }
 
@@ -65,7 +65,7 @@ public class CardManager {
     }
 
     private void checkForMatch(Card card) {
-        if (isCheckingForMatch == false) { // check if not already checking for match
+        if (!isCheckingForMatch) { // check if not already checking for match
             card.turnCard();
             if (previousCard != null && previousCard != card) {
                 if (!matchedCards.contains(card) && !matchedCards.contains(previousCard)) {
@@ -88,6 +88,7 @@ public class CardManager {
                             previousCard.turnCard();
                             previousCard = null;
                             isCheckingForMatch = false;
+                            statManager.incrementTries();
                         });
                         delay.play();
                     }
@@ -108,9 +109,7 @@ public class CardManager {
                 cardValue++;
             }
             Card card = new Card(cardValue);
-            card.setOnAction(event -> {
-                checkForMatch(card);
-            });
+            card.setOnAction(event -> checkForMatch(card));
             cardList.add(card);
         }
     }

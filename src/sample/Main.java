@@ -7,11 +7,11 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         Game game = new Game();
         primaryStage.setScene(game.getMainScene());
-        primaryStage.setHeight(460);
-        primaryStage.setWidth(430);
+        primaryStage.setHeight(475);
+        primaryStage.setWidth(470);
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image(String.valueOf(getClass().getResource("resources/icons/memory.png"))));
         primaryStage.setTitle("Java A3 V2");

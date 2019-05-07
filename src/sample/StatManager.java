@@ -58,7 +58,7 @@ public class StatManager {
 
     public void resetTries() {
         tries = 0;
-        scoreLabel.setText("Tries: " + tries);
+        triesLabel.setText("Tries: " + tries);
     }
 
     public void incrementScore() {
